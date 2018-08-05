@@ -14,10 +14,11 @@
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
   </head>
 
-  <body class="text-center">
+  <body class="text-center" background="https://source.unsplash.com/user/timtrad/900x900">
+
     <form class="form-signin" action="{{ url('login') }}" method="POST">
         {{ csrf_field() }}
-
+<div class="card p-4">
         <img class="mb-4" src="https://avatars2.githubusercontent.com/u/41131861?s=200&v=4" alt="" width="100" height="100">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
@@ -36,6 +37,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted text-left">&copy; {{ config('app.name') }} &mdash; {{ date('Y') }}</p>
 
+</div>
     </form>
   </body>
 </html>

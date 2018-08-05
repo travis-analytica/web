@@ -1,3 +1,13 @@
+body {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 html,
 body {
   height: 100%;
@@ -15,13 +25,15 @@ body {
 
 .form-signin {
   width: 100%;
-  max-width: 330px;
+  max-width: 530px;
   padding: 15px;
   margin: auto;
 }
 .form-signin img {
     border-radius: 1em;
     box-shadow: 0 0 10px #666;
+    margin-left: auto;
+    margin-right: auto;
 }
 .form-signin .checkbox {
   font-weight: 400;
