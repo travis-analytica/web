@@ -27,14 +27,14 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
 
-        <div class="checkbox mb-3">
+        <div class="checkbox mb-3 text-left">
         <label>
             <input type="checkbox" name="remember-me" value="remember-me"> Remember me
         </label>
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; {{ date('Y') }}</p>
+        <p class="mt-5 mb-3 text-muted text-left">&copy; {{ config('app.name') }} &mdash; {{ date('Y') }}</p>
 
     </form>
   </body>

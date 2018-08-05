@@ -37,7 +37,7 @@
                         <a class="nav-link disabled" href="#" disabled>Audits</a>
                     </li>
                 </ul>
-                <form class="form-inline mt-2 mt-md-0">
+                <div class="form-inline mt-2 mt-md-0">
                     @if( Auth::check() )
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
@@ -45,7 +45,7 @@
                             </li>
                         </ul>
                     @endif
-                </form>
+                </div>
             </div>
         </div>
       </nav>
@@ -56,7 +56,7 @@
         @yield('content')
     </main>
 
-    <footer class="footer">
+    <footer class="footer bg-light">
       <div class="container">
         <span class="text-muted">&copy; {{ config('app.name') }} &mdash; {{ date('Y') }}</span>
       </div>
