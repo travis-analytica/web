@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,20 +15,27 @@
   </head>
 
   <body class="text-center">
-    <form class="form-signin">
-      <img class="mb-4" src="https://avatars2.githubusercontent.com/u/41131861?s=200&v=4" alt="" width="100" height="100">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <div class="checkbox mb-3">
+    <form class="form-signin" action="{{ url('login') }}" method="POST">
+        {{ csrf_field() }}
+
+        <img class="mb-4" src="https://avatars2.githubusercontent.com/u/41131861?s=200&v=4" alt="" width="100" height="100">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" value="{{ old('email') }}" required autofocus>
+
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
+
+        <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" name="remember-me" value="remember-me"> Remember me
         </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">&copy; {{ date('Y') }}</p>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; {{ date('Y') }}</p>
+
     </form>
   </body>
 </html>

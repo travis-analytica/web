@@ -13,8 +13,35 @@ class HomeController extends Controller
         if( Auth::guest() ) {
             return view('login.login');
         }else{
-            return view('home');
+            return view('welcome');
         }
+    }
+
+    public function login(Request $request)
+    {
+
+        $request->validate(
+            [
+                'email' => 'required',
+                'password' => 'required',
+            ]
+        );
+
+        $credentials = $request->only('email', 'password');
+        $remember = ($request->get('remember-me') == 'remember-me') ? true : false;
+
+        if (Auth::attempt($credentials, $remember)) {
+            return redirect()->intended( route('home') );
+        }else{
+            return redirect()->back()->withInput($request->all());
+        }
+
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect( route('home') );
     }
 
 }

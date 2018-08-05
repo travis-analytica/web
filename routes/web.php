@@ -18,3 +18,19 @@ Route::get(
         'uses' => 'HomeController@index',
     ]
 );
+
+Route::post(
+    'login',
+    [
+        'as' => 'login',
+        'uses' => 'HomeController@login',
+    ]
+);
+
+Route::get(
+    'logout',
+    [
+        'as' => 'logout',
+        'uses' => 'HomeController@logout',
+    ]
+);
