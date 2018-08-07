@@ -26,14 +26,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('home') }}">Home</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#" disabled>Cases</a>
+                        <a class="nav-link" href="{{ route('case.index') }}">Cases</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#" disabled>Audits</a>
+                        <a class="nav-link disabled" href="#" disabled> <s>Audits</s> </a>
                     </li>
                 </ul>
                 <div class="form-inline mt-2 mt-md-0">
