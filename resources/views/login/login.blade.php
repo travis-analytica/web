@@ -14,7 +14,7 @@
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
   </head>
 
-  <body class="text-center" background="https://source.unsplash.com/user/timtrad/900x900">
+  <body class="text-center" background="{{ asset('img/login-cover.png') }}">
 
     <form class="form-signin" action="{{ url('login') }}" method="POST">
         {{ csrf_field() }}
