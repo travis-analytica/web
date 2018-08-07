@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
 
     <title>{{ config('app.name') }}</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this site -->
     <link href="{{ asset('css/login.css') }}" rel="stylesheet">
-  </head>
+</head>
 
   <body class="text-center" background="{{ asset('img/login-cover.png') }}">
 
