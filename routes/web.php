@@ -34,3 +34,5 @@ Route::get(
         'uses' => 'HomeController@logout',
     ]
 );
+
+Route::resource('case', 'CaseController');
