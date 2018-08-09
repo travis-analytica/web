@@ -33,7 +33,7 @@
                         <a class="nav-link" href="{{ route('case.index') }}">Cases</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#" disabled> <s>Audits</s> </a>
+                        <a class="nav-link" href="{{ route('delinquency.index') }}"> Delinquency </a>
                     </li>
                 </ul>
                 <div class="form-inline mt-2 mt-md-0">

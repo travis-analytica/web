@@ -36,3 +36,12 @@ Route::get(
 );
 
 Route::resource('case', 'CaseController');
+
+
+Route::get(
+    'delinquency',
+    [
+        'as' => 'delinquency.index',
+        'uses' => 'DelinquencyController@index',
+    ]
+);
