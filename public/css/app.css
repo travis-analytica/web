@@ -22,6 +22,10 @@ body > .container {
     }
 }
 
+table.table td {
+    white-space: nowrap;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
