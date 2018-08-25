@@ -2,13 +2,17 @@
 
 @section('content')
 
-<table class="table table-bordered table-striped table-hover">
-    <tr>
-        <th>Case Number</th>
-        <th>Date Filed</th>
-        <th>Status</th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+<table id="datatable" class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Case Number</th>
+            <th>Date Filed</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
     @foreach($cases as $case)
     <tr>
         <td>
@@ -17,11 +21,11 @@
         <td>
             {{ $case->date_filed }}
         </td>
-        <td>
+        <td class="text-center">
             @if($case->status == 1)
-                <span class="badge badge-danger p-2">Closed</span>
+                <span class="badge badge-danger p-2 d-block">Closed</span>
             @else
-                <span class="badge badge-success p-2">Open</span>
+                <span class="badge badge-success p-2 d-block">Open</span>
             @endif
         </td>
         <td>
@@ -29,6 +33,8 @@
         </td>
     </tr>
     @endforeach
+    </tbody>
 </table>
+</div>
 
 @stop

@@ -69,7 +69,7 @@
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $(document).ready( function () {
-            $('#datable').DataTable({
+            $('#datatable').DataTable({
                 "searching": false,
                 "paging":   false,
                 "ordering": false,
