@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cases;
+use App\Party;
 use Illuminate\Http\Request;
 
 class CaseController extends Controller
@@ -48,9 +49,15 @@ class CaseController extends Controller
      */
     public function show($id)
     {
-        $data['case'] = Cases::find($id);
+        $case = Cases::find($id);
+        $parties = Party::where('case_number', $case->case_number)->get();
 
-        return view('cases.show', $data);
+        $data = [
+            'case'    => $case,
+            'parties' => $parties,
+        ];
+
+        return view( 'cases.show', compact('case', 'parties') );
     }
 
     /**
