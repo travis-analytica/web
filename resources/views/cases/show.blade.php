@@ -6,9 +6,9 @@
 
 
     @if($case->status == 1)
-        <h4><span class="bg-danger text-white text-center p-2 mt-2 d-block d-sm-inline float-sm-right">Closed</span></h4>
+        <h4><span class="bg-danger rounded text-white text-center p-2 mt-2 d-block d-sm-inline float-sm-right">Closed</span></h4>
     @else
-        <h4><span class="bg-success text-white text-center p-2 mt-2 d-block d-sm-inline float-sm-right">Open</span></h4>
+        <h4><span class="bg-success rounded text-white text-center p-2 mt-2 d-block d-sm-inline float-sm-right">Open</span></h4>
     @endif
 
     <h1>{{ $case->case_number }}</h1>
