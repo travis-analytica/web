@@ -25,28 +25,31 @@
         @else
             Plaintiff
         @endif
+        <small class="text-muted">({{count($parties)}})</small>
     </h2>
 
     @foreach($parties as $party)
         <hr>
-        <p>
-            <strong>Name:</strong><br>
-            {{ ucwords(strtolower($party->name)) }}
-        </p>
-        <p>
-            <strong>Address:</strong><br>
-            {{ ucwords(strtolower($party->address)) }}
-            <br>
-            {{ ucwords(strtolower($party->city)) }},
-            {{ $party->state }} {{ $party->zip }}
-            <br>
-            <small>
-                <a href="https://maps.google.com/?q={{ ucwords(strtolower($party->address)) }} {{ ucwords(strtolower($party->city)) }} {{ $party->state }} {{ $party->zip }}" target="_blank">
-                    view on map
-                </a>
-            </small>
+        <div class="row">
+            <p class="col-sm-6">
+                <strong>Name:</strong><br>
+                {{ ucwords(strtolower($party->name)) }}
+            </p>
+            <p class="col-sm-6">
+                <strong>Address:</strong><br>
+                {{ ucwords(strtolower($party->address)) }}
+                <br>
+                {{ ucwords(strtolower($party->city)) }},
+                {{ $party->state }} {{ $party->zip }}
+                <br>
+                <small>
+                    <a href="https://maps.google.com/?q={{ ucwords(strtolower($party->address)) }} {{ ucwords(strtolower($party->city)) }} {{ $party->state }} {{ $party->zip }}" target="_blank">
+                        view on map
+                    </a>
+                </small>
 
-        </p>
+            </p>
+        </div>
     @endforeach
 
 
