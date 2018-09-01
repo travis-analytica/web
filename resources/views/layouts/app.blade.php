@@ -27,14 +27,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+                    <li class="nav-item {{ (Request::url() == route('home') ) ? 'active' : null }}">
                         <a class="nav-link" href="{{ route('home') }}">Home</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('case.index') }}">Cases</a>
+                        <a class="nav-link {{ (strpos(Request::url(), route('case.index')) > -1) ? 'active' : null }}" href="{{ route('case.index') }}">Eviction Cases</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('delinquency.index') }}"> Delinquency </a>
+                        <a class="nav-link {{ (strpos(Request::url(), route('delinquency.index')) > -1) ? 'active' : null }}" href="{{ route('delinquency.index') }}">Tax Delinquencies</a>
                     </li>
                 </ul>
                 <div class="form-inline mt-2 mt-md-0">
