@@ -14,4 +14,24 @@ class Delinquency extends Eloquent
        */
       protected $table = 'delinquency';
 
+      /**
+       * Get the record's property class.
+       *
+       * @param  integer  $value
+       * @return string
+       */
+      function getPropertyClassAttribute($value)
+      {
+        $classes = [
+          'Residential',
+          'Commercial',
+          'Exempt',
+          'Industrial',
+          'Agricultural',
+          'Utility',
+        ];
+
+        return $classes[$value - 1];
+      }
+
 }
