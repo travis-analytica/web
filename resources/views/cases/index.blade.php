@@ -2,6 +2,8 @@
 
 @section('content')
 
+<h1>Eviction Cases</h1>
+
 <div class="table-responsive">
 <table id="datatable" class="table table-bordered table-striped table-hover">
     <thead>
