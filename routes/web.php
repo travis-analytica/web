@@ -45,3 +45,10 @@ Route::get(
         'uses' => 'DelinquencyController@index',
     ]
 );
+Route::get(
+    'delinquency/export',
+    [
+        'as'   => 'delinquency.export',
+        'uses' => 'DelinquencyController@export',
+    ]
+);

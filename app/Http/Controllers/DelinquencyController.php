@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Delinquency;
+use App\Exports\DelinquencyExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class DelinquencyController extends Controller
@@ -83,5 +85,16 @@ class DelinquencyController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Export the specified resource to an Excel file.
+     *
+     * @return Maatwebsite\Excel\Facades\Excel
+     */
+    public function export()
+    {
+        ini_set('memory_limit', '-1');
+        return Excel::download(new DelinquencyExport, 'tax_delinquencies.xlsx');
     }
 }

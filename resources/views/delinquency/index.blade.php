@@ -2,6 +2,16 @@
 
 @section('content')
 
+<div class="row">
+    <div class="col-sm-8">
+        <h1>Tax Delinquencies</h1>
+    </div>
+    <div class="col-sm-4">
+        <a href="{{ route('delinquency.export') }}" class="btn btn-outline-secondary btn-lg float-sm-right d-block d-sm-inline mt-2">EXPORT</a>
+    </div>
+</div>
+
+
 <div class="table-responsive">
 <table id="datatable" class="table table-bordered table-striped table-hover">
     <thead>
