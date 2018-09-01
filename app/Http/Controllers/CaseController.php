@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Cases;
 use App\Party;
+use \App\CaseNote;
 use Illuminate\Http\Request;
 
 class CaseController extends Controller
@@ -51,13 +53,9 @@ class CaseController extends Controller
     {
         $case = Cases::find($id);
         $parties = Party::where('case_number', $case->case_number)->get();
+        $notes = CaseNote::where('case_id', $id)->get();
 
-        $data = [
-            'case'    => $case,
-            'parties' => $parties,
-        ];
-
-        return view( 'cases.show', compact('case', 'parties') );
+        return view( 'cases.show', compact('case', 'parties', 'notes') );
     }
 
     /**
@@ -92,5 +90,22 @@ class CaseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Store a newly created case note in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeNote(Request $request, $id)
+    {
+        $note = new CaseNote();
+        $note->user_id = Auth::user()->id;
+        $note->case_id = $id;
+        $note->note = $request->get('note');
+        $note->save();
+
+        return redirect( route('case.show', $id) );
     }
 }
