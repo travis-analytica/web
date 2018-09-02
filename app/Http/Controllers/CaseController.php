@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Auth;
 use App\Cases;
 use App\Party;
@@ -103,7 +102,7 @@ class CaseController extends Controller
     {
         $case = Cases::find($id);
         $case->completion_status = $request->get('completion_status');
-        $case->completion_status_updated_at = DB::raw('now()');
+        $case->completion_status_updated_at = date('Y-m-d H:i:s');
         $case->save();
 
         return redirect( route('case.show', $id) );
