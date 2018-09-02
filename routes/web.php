@@ -37,6 +37,13 @@ Route::get(
 
 Route::resource('case', 'CaseController');
 Route::post(
+    'case/{id}/status/store',
+    [
+        'as'   => 'case.status.store',
+        'uses' => 'CaseController@storeStatus',
+    ]
+);
+Route::post(
     'case/{id}/notes/store',
     [
         'as'   => 'case.note.store',

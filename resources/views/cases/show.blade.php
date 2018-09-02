@@ -56,6 +56,22 @@
         </div>
 
         <div class="col-sm-6">
+            <h2 class="d-inline">Status</h2>
+            @if($case->completion_status_updated_at != null)
+                <small class="text-muted">Updated: {{ $case->completion_status_updated_at }}</small>
+            @endif
+
+            <form action="{{ route('case.status.store', $case->id) }}" method="POST">
+                {{ csrf_field() }}
+                <div class="btn-group d-flex" role="group">
+                    <button type="submit" name="completion_status" value="0" class="btn btn-sm btn-outline-secondary w-100 {{ ($case->completion_status == 0)?'active':null }}">Not Started</button>
+                    <button type="submit" name="completion_status" value="1" class="btn btn-sm btn-outline-secondary w-100 {{ ($case->completion_status == 1)?'active':null }}">In Progress</button>
+                    <button type="submit" name="completion_status" value="2" class="btn btn-sm btn-outline-secondary w-100 {{ ($case->completion_status == 2)?'active':null }}">Complete</button>
+                </div>
+            </form>
+
+            <br>
+
             <h2>
                 Notes
                 <small class="text-muted">({{count($notes)}})</small>
