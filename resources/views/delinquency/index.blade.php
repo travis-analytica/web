@@ -15,55 +15,67 @@
 <div class="table-responsive">
 <table id="datatable" class="table table-bordered table-striped table-hover">
     <thead>
-    <tr>
-        <!-- <th>property_class</th> -->
-        <th>parcel_id</th>
-        <!-- <th>flag_summary</th> -->
-        <th>owner_name_1</th>
-        <!-- <th>owner_Name_2</th> -->
-        <!-- <th>supp_rllbk_flag</th>/ -->
-        <!-- <th>hmstd_flag</th> -->
-        <th>mail_name_1</th>
-        <!-- <th>mail_name_2</th> -->
-        <th>mail_address_1</th>
-        <!-- <th>mail_address_2</th> -->
-        <th>mailing_address_city</th>
-        <th>mailing_address_state</th>
-        <th>mailing_address_zip</th>
-        <!-- <th>mailing_address_plus4</th> -->
-        <th>mailing_address_1</th>
-        <th>owner_address_1</th>
-        <!-- <th>owner_address_2</th> -->
-        <!-- <th>local_address_2</th> -->
-        <!-- <th>legal_desc</th> -->
-        <th>total_val</th>
-        <th>net_tax_due</th>
+    <tr class="text-nowrap">
+    <th>1: Parcel ID</th>
+    <th>2: Mail Address 1</th>
+    <th>3: Mailing Address Zip</th>
+    <th>4: COMPANY NAME</th>
+    <th>5: Owner Name 1</th>
+    <th>6: Owner Name 2</th>
+    <th>7: Owner Address 1</th>
+    <th>8: Owner City/State/Zip</th>
+    <th class="bg-danger">9: TAX DISTRICT</th>
+    <th class="bg-danger">10: SCHOOL DISTRICT</th>
+    <th class="bg-danger">11: RENTAL REGISTRATION</th>
+    <th class="bg-danger">12: TAX LIEN</th>
+    <th class="bg-danger">13: YEAR BUILT</th>
+    <th class="bg-danger">14: TOTAL SQ. FEET</th>
+    <th class="bg-danger">15: BEDROOMS</td>
+    <th class="bg-danger">16: FULL BATHROOMS</td>
+    <th class="bg-danger">17: HALF BATHROOMS</td>
+    <th class="bg-danger">18: ACRES</td>
+    <th class="bg-danger">19: TRANSFER DATE</td>
+    <th class="bg-danger">20: TRANSFER PRICE</td>
+    <th >21: PROPERTY CLASS</td>
+    <th class="bg-danger">22: LAND USE</td>
+    <th class="bg-danger">23: ANNUAL TAXES</td>
+    <th class="bg-danger">24: PRIOR TAX OWED</td>
+    <th class="bg-danger">25: PAYMENT</td>
+    <th class="bg-danger">26: BALANCE TAXES DUE</td>
     </tr>
     </thead>
     <tbody>
     @foreach($delinquencies as $delinquency)
-    <tr>
-        <!-- <td>{{ $delinquency->property_class }}</td> -->
+        <tr>
         <td>{{ $delinquency->parcel_id }}</td>
-        <!-- <td>{{ $delinquency->flag_summary }}</td> -->
-        <td>{{ $delinquency->owner_name_1 }}</td>
-        <!-- <td>{{ $delinquency->owner_Name_2 }}</td> -->
-        <!-- <td>{{ $delinquency->supp_rllbk_flag }}</td> -->
-        <!-- <td>{{ $delinquency->hmstd_flag }}</td> -->
-        <td>{{ $delinquency->mail_name_1 }}</td>
-        <!-- <td>{{ $delinquency->mail_name_2 }}</td> -->
         <td>{{ $delinquency->mail_address_1 }}</td>
-        <!-- <td>{{ $delinquency->mail_address_2 }}</td> -->
-        <td>{{ $delinquency->mailing_address_city }}</td>
-        <td>{{ $delinquency->mailing_address_state }}</td>
         <td>{{ $delinquency->mailing_address_zip }}</td>
-        <!-- <td>{{ $delinquency->mailing_address_plus4 }}</td> -->
-        <td>{{ $delinquency->mailing_address_1 }}</td>
+        <td class="table-info"></td>
+        <td>{{ $delinquency->owner_name_1 }}</td>
+        <td>{{ $delinquency->owner_Name_2 }}</td>
         <td>{{ $delinquency->owner_address_1 }}</td>
-        <!-- <td>{{ $delinquency->owner_address_2 }}</td> -->
-        <!-- <td>{{ $delinquency->local_address_2 }}</td> -->
-        <!-- <td>{{ $delinquency->legal_desc }}</td> -->
-        <td>{{ $delinquency->total_val }}</td>
+        <td>
+            {{ $delinquency->mailing_address_city }}
+            {{ $delinquency->mailing_address_state }}
+            {{ $delinquency->mailing_address_zip }}
+        </td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td>{{ $delinquency->property_class }}</td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
+        <td class="table-danger"></td>
         <td>{{ $delinquency->net_tax_due }}</td>
     </tr>
     @endforeach

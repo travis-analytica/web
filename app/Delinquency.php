@@ -23,12 +23,12 @@ class Delinquency extends Eloquent
       function getPropertyClassAttribute($value)
       {
         $classes = [
-          'Residential',
-          'Commercial',
-          'Exempt',
-          'Industrial',
-          'Agricultural',
-          'Utility',
+          'R - Residential',
+          'C - Commercial',
+          'E - Exempt',
+          'I - Industrial',
+          'A - Agricultural',
+          'Z - Utility',
         ];
 
         return $classes[$value - 1];
