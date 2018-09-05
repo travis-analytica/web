@@ -39,4 +39,6 @@
 </table>
 </div>
 
+{{ $cases->links() }}
+
 @stop
