@@ -24,24 +24,24 @@
     <th>6: Owner Name 2</th>
     <th>7: Owner Address 1</th>
     <th>8: Owner City/State/Zip</th>
-    <th class="bg-danger">9: TAX DISTRICT</th>
-    <th class="bg-danger">10: SCHOOL DISTRICT</th>
-    <th class="bg-danger">11: RENTAL REGISTRATION</th>
-    <th class="bg-danger">12: TAX LIEN</th>
-    <th class="bg-danger">13: YEAR BUILT</th>
-    <th class="bg-danger">14: TOTAL SQ. FEET</th>
-    <th class="bg-danger">15: BEDROOMS</td>
-    <th class="bg-danger">16: FULL BATHROOMS</td>
-    <th class="bg-danger">17: HALF BATHROOMS</td>
-    <th class="bg-danger">18: ACRES</td>
-    <th class="bg-danger">19: TRANSFER DATE</td>
-    <th class="bg-danger">20: TRANSFER PRICE</td>
+    <th>9: TAX DISTRICT</th>
+    <th>10: SCHOOL DISTRICT</th>
+    <th>11: RENTAL REGISTRATION</th>
+    <th>12: TAX LIEN</th>
+    <th>13: YEAR BUILT</th>
+    <th>14: TOTAL SQ. FEET</th>
+    <th>15: BEDROOMS</td>
+    <th>16: FULL BATHROOMS</td>
+    <th>17: HALF BATHROOMS</td>
+    <th>18: ACRES</td>
+    <th>19: TRANSFER DATE</td>
+    <th>20: TRANSFER PRICE</td>
     <th >21: PROPERTY CLASS</td>
-    <th class="bg-danger">22: LAND USE</td>
-    <th class="bg-danger">23: ANNUAL TAXES</td>
-    <th class="bg-danger">24: PRIOR TAX OWED</td>
-    <th class="bg-danger">25: PAYMENT</td>
-    <th class="bg-danger">26: BALANCE TAXES DUE</td>
+    <th>22: LAND USE</td>
+    <th>23: ANNUAL TAXES</td>
+    <th>24: PRIOR TAX OWED</td>
+    <th>25: PAYMENT</td>
+    <th>26: BALANCE TAXES DUE</td>
     </tr>
     </thead>
     <tbody>
