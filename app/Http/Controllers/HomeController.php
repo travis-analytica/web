@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\TaxInfo;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,11 @@ class HomeController extends Controller
         if( Auth::guest() ) {
             return view('login.login');
         }else{
-            return view('welcome');
+            $scraped = TaxInfo::where('status', '>', 0)->count();
+            $properties = TaxInfo::count();
+            $progress = round( ((100 / $properties) * $scraped), 2);
+
+            return view('welcome', ['progress' => $progress]);
         }
     }
 
