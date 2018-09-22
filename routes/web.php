@@ -53,16 +53,16 @@ Route::post(
 
 
 Route::get(
-    'delinquency',
+    'tax-info',
     [
-        'as' => 'delinquency.index',
-        'uses' => 'DelinquencyController@index',
+        'as' => 'tax-info.index',
+        'uses' => 'TaxInfoController@index',
     ]
 );
 Route::get(
-    'delinquency/export',
+    'tax-info/export',
     [
-        'as'   => 'delinquency.export',
-        'uses' => 'DelinquencyController@export',
+        'as'   => 'tax-info.export',
+        'uses' => 'TaxInfoController@export',
     ]
 );

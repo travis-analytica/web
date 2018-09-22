@@ -2,16 +2,16 @@
 
 namespace App\Exports;
 
-use App\Delinquency;
+use App\TaxInfo;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class DelinquencyExport implements FromCollection
+class TaxInfoExport implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Delinquency::where('property_class', 1)->get();
+        return TaxInfo::where('property_class', 'R - Resetential')->get();
     }
 }

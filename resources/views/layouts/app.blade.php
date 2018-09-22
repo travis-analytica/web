@@ -34,7 +34,7 @@
                         <a class="nav-link {{ (strpos(Request::url(), route('case.index')) > -1) ? 'active' : null }}" href="{{ route('case.index') }}">Eviction Cases</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ (strpos(Request::url(), route('delinquency.index')) > -1) ? 'active' : null }}" href="{{ route('delinquency.index') }}">Tax Delinquencies</a>
+                        <a class="nav-link {{ (strpos(Request::url(), route('tax-info.index')) > -1) ? 'active' : null }}" href="{{ route('tax-info.index') }}">Tax Info</a>
                     </li>
                 </ul>
                 <div class="form-inline mt-2 mt-md-0">
