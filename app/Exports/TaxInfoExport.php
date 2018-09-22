@@ -12,6 +12,6 @@ class TaxInfoExport implements FromCollection
     */
     public function collection()
     {
-        return TaxInfo::where('property_class', 'R - Resetential')->get();
+        return TaxInfo::where('status', 1)->where('property_class', 'R - Residential')->get();
     }
 }
