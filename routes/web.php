@@ -27,6 +27,17 @@ Route::post(
     ]
 );
 
+/*
+|--------------------------------------------------------------------------
+| Auth Protected Routes
+|--------------------------------------------------------------------------
+|
+| These routes are only accessible when a user is logged in
+|
+*/
+Route::group(['middleware' => ['auth']], function() {
+
+
 Route::get(
     'logout',
     [
@@ -66,3 +77,6 @@ Route::get(
         'uses' => 'TaxInfoController@export',
     ]
 );
+
+
+}); /* End of middleware:auth group */
