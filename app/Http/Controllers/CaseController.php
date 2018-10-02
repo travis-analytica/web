@@ -55,7 +55,18 @@ class CaseController extends Controller
         $parties = Party::where('case_number', $case->case_number)->get();
         $notes = CaseNote::where('case_id', $id)->get();
 
-        return view( 'cases.show', compact('case', 'parties', 'notes') );
+        $plaintiffs = [];
+        $defendants = [];
+
+        foreach($parties as $party) {
+            if($party->party_type == 'PLAINTIFF') {
+                array_push($plaintiffs, $party);
+            }else{
+                array_push($defendants, $party);
+            }
+        }
+
+        return view( 'cases.show', compact('case', 'parties', 'plaintiffs', 'defendants', 'notes') );
     }
 
     /**

@@ -22,30 +22,66 @@
 
         <div class="col-sm-6">
             <h2>
-                @if(count($parties) > 1)
+                @if(count($plaintiffs) > 1)
                     Plaintiffs
                 @else
                     Plaintiff
                 @endif
-                <small class="text-muted">({{count($parties)}})</small>
+                <small class="text-muted">({{count($plaintiffs)}})</small>
             </h2>
 
-            @foreach($parties as $party)
+            @foreach($plaintiffs as $plaintiff)
                 <hr>
                 <div class="row">
                     <p class="col-12">
                         <strong>Name:</strong><br>
-                        {{ ucwords(strtolower($party->name)) }}
+                        {{ ucwords(strtolower($plaintiff->name)) }}
                     </p>
                     <p class="col-12">
                         <strong>Address:</strong><br>
-                        {{ ucwords(strtolower($party->address)) }}
+                        {{ ucwords(strtolower($plaintiff->address)) }}
                         <br>
-                        {{ ucwords(strtolower($party->city)) }},
-                        {{ $party->state }} {{ $party->zip }}
+                        {{ ucwords(strtolower($plaintiff->city)) }},
+                        {{ $plaintiff->state }} {{ $plaintiff->zip }}
                         <br>
                         <small>
-                            <a href="https://maps.google.com/?q={{ ucwords(strtolower($party->address)) }} {{ ucwords(strtolower($party->city)) }} {{ $party->state }} {{ $party->zip }}" target="_blank">
+                            <a href="https://maps.google.com/?q={{ ucwords(strtolower($plaintiff->address)) }} {{ ucwords(strtolower($plaintiff->city)) }} {{ $plaintiff->state }} {{ $plaintiff->zip }}" target="_blank">
+                                view on map
+                            </a>
+                        </small>
+
+                    </p>
+                </div>
+            @endforeach
+
+            <hr>
+
+
+            <h2>
+                @if(count($defendants) > 1)
+                    Defendants
+                @else
+                    Defendant
+                @endif
+                <small class="text-muted">({{count($defendants)}})</small>
+            </h2>
+
+            @foreach($defendants as $defendant)
+                <hr>
+                <div class="row">
+                    <p class="col-12">
+                        <strong>Name:</strong><br>
+                        {{ ucwords(strtolower($defendant->name)) }}
+                    </p>
+                    <p class="col-12">
+                        <strong>Address:</strong><br>
+                        {{ ucwords(strtolower($defendant->address)) }}
+                        <br>
+                        {{ ucwords(strtolower($defendant->city)) }},
+                        {{ $defendant->state }} {{ $defendant->zip }}
+                        <br>
+                        <small>
+                            <a href="https://maps.google.com/?q={{ ucwords(strtolower($defendant->address)) }} {{ ucwords(strtolower($defendant->city)) }} {{ $defendant->state }} {{ $defendant->zip }}" target="_blank">
                                 view on map
                             </a>
                         </small>
