@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Delinquency;
-use App\Exports\DelinquencyExport;
+use App\TaxInfo;
+use App\Exports\TaxInfoExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
-class DelinquencyController extends Controller
+class TaxInfoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class DelinquencyController extends Controller
      */
     public function index()
     {
-        $data['delinquencies'] = Delinquency::where('property_class', 1)->paginate(10);
+        $data['parcels'] = TaxInfo::where('status', 1)->where('property_class', 'R - Residential')->paginate(10);
 
-        return view('delinquency.index', $data);
+        return view('tax-info.index', $data);
     }
 
     /**
@@ -95,6 +95,6 @@ class DelinquencyController extends Controller
     public function export()
     {
         ini_set('memory_limit', '-1');
-        return Excel::download(new DelinquencyExport, 'tax_delinquencies.xlsx');
+        return Excel::download(new TaxInfoExport, 'tax_info.xlsx');
     }
 }

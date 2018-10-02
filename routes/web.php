@@ -27,6 +27,17 @@ Route::post(
     ]
 );
 
+/*
+|--------------------------------------------------------------------------
+| Auth Protected Routes
+|--------------------------------------------------------------------------
+|
+| These routes are only accessible when a user is logged in
+|
+*/
+Route::group(['middleware' => ['auth']], function() {
+
+
 Route::get(
     'logout',
     [
@@ -53,16 +64,19 @@ Route::post(
 
 
 Route::get(
-    'delinquency',
+    'tax-info',
     [
-        'as' => 'delinquency.index',
-        'uses' => 'DelinquencyController@index',
+        'as' => 'tax-info.index',
+        'uses' => 'TaxInfoController@index',
     ]
 );
 Route::get(
-    'delinquency/export',
+    'tax-info/export',
     [
-        'as'   => 'delinquency.export',
-        'uses' => 'DelinquencyController@export',
+        'as'   => 'tax-info.export',
+        'uses' => 'TaxInfoController@export',
     ]
 );
+
+
+}); /* End of middleware:auth group */
