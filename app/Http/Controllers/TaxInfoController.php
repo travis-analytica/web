@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Redirect;
 use App\TaxInfo;
 use App\Exports\TaxInfoExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -22,69 +23,60 @@ class TaxInfoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a bulk upload form for the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function upload()
     {
-        //
+        return view('tax-info.upload');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $batchNumber = $this->getNextBatchNumber();
+
+        $parcelList = explode("\r\n", $request->get('parcel-list') );
+        foreach($parcelList as $parcelId) {
+            $this->insertParcelId($parcelId, $batchNumber);
+        }
+
+        return Redirect::route('tax-info.index');
     }
 
     /**
-     * Display the specified resource.
+     * Get the next iteration of the resource's batch id.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Integer
      */
-    public function show($id)
+    public function getNextBatchNumber()
     {
-        //
+        $lastBatchId = TaxInfo::select('batch_id')->orderBy('batch_id', 'DESC')->first();
+        return ( intval($lastBatchId->batch_id) ) + 1;
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Handle update/insert of a parcel id.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param String $parcelId
+     * @param Integer $batchId
      */
-    public function edit($id)
+    public function insertParcelId($parcelId, $batchId)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $updateCount = TaxInfo::where('parcel_id', $parcelId)->limit(1)->update(['batch_id' => $batchId]);
+        if($updateCount == 0) {
+            $parcel = new TaxInfo();
+            $parcel->batch_id = $batchId;
+            $parcel->status = 0;
+            $parcel->parcel_id = $parcelId;
+            $parcel->save();
+        }
     }
 
     /**
