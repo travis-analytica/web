@@ -17,7 +17,10 @@ class TaxInfoController extends Controller
      */
     public function index()
     {
-        $data['parcels'] = TaxInfo::where('status', 1)->where('property_class', 'R - Residential')->paginate(10);
+        $data['parcels'] = TaxInfo::where('status', 1)
+            ->where('batch_id', $this->getLatestBatchNumber())
+            ->where('property_class', 'R - Residential')
+            ->paginate(10);
 
         return view('tax-info.index', $data);
     }
@@ -51,14 +54,25 @@ class TaxInfoController extends Controller
     }
 
     /**
+    * Get the last iteration of the resource's batch id.
+    *
+    * @return Integer
+    */
+    public function getLatestBatchNumber()
+    {
+        $lastBatchId = TaxInfo::select('batch_id')->orderBy('batch_id', 'DESC')->first();
+        return intval($lastBatchId->batch_id);
+    }
+
+    /**
      * Get the next iteration of the resource's batch id.
      *
      * @return Integer
      */
     public function getNextBatchNumber()
     {
-        $lastBatchId = TaxInfo::select('batch_id')->orderBy('batch_id', 'DESC')->first();
-        return ( intval($lastBatchId->batch_id) ) + 1;
+        $lastBatchId = $this->getLatestBatchNumber();
+        return $lastBatchId + 1;
     }
 
     /**
