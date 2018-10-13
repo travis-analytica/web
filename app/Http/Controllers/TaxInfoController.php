@@ -58,7 +58,7 @@ class TaxInfoController extends Controller
     *
     * @return Integer
     */
-    public function getLatestBatchNumber()
+    private function getLatestBatchNumber()
     {
         $lastBatchId = TaxInfo::select('batch_id')->orderBy('batch_id', 'DESC')->first();
         return intval($lastBatchId->batch_id);
@@ -69,7 +69,7 @@ class TaxInfoController extends Controller
      *
      * @return Integer
      */
-    public function getNextBatchNumber()
+    private function getNextBatchNumber()
     {
         $lastBatchId = $this->getLatestBatchNumber();
         return $lastBatchId + 1;
@@ -81,7 +81,7 @@ class TaxInfoController extends Controller
      * @param String
      * @return Boolean
      */
-    public function isValidParcelId($parcelId)
+    private function isValidParcelId($parcelId)
     {
         return preg_match('/[0-9]{3}\-[0-9]{6}\-[0-9]{2}/', $parcelId);
     }
