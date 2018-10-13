@@ -25,6 +25,24 @@
         </div>
     </div>
 
+    <div id="cover" class="d-none">
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-6 mx-auto text-center font-weight-light text-uppercase text-white">
+                    <h1 class="font-weight-light">Uploading data</h1>
+                    <h5 class="font-weight-light">This may take a couple minutes</h5>
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </form>
+
+<script>
+    document.getElementsByTagName('form')[0].addEventListener('submit', function(e){
+        document.querySelector('#cover').classList.remove('d-none');
+    });
+</script>
 
 @stop

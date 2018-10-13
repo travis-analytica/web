@@ -43,6 +43,8 @@ class TaxInfoController extends Controller
      */
     public function store(Request $request)
     {
+        set_time_limit(200);
+
         $batchNumber = $this->getNextBatchNumber();
 
         $parcelList = explode("\r\n", $request->get('parcel-list') );
