@@ -12,4 +12,10 @@ class TaxInfo extends Model
      */
     protected $table="tax_info";
 
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var boolean
+     */
+    public $timestamps = false;
 }

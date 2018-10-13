@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Redirect;
 use App\TaxInfo;
 use App\Exports\TaxInfoExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -16,75 +17,95 @@ class TaxInfoController extends Controller
      */
     public function index()
     {
-        $data['parcels'] = TaxInfo::where('status', 1)->where('property_class', 'R - Residential')->paginate(10);
+        $data['parcels'] = TaxInfo::where('status', 1)
+            ->where('batch_id', $this->getLatestBatchNumber())
+            ->where('property_class', 'R - Residential')
+            ->paginate(10);
 
         return view('tax-info.index', $data);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a bulk upload form for the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function upload()
     {
-        //
+        return view('tax-info.upload');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        set_time_limit(200);
+
+        $batchNumber = $this->getNextBatchNumber();
+
+        $parcelList = explode("\r\n", $request->get('parcel-list') );
+        foreach($parcelList as $parcelId) {
+            $this->insertParcelId($parcelId, $batchNumber);
+        }
+
+        return Redirect::route('tax-info.index');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    * Get the last iteration of the resource's batch id.
+    *
+    * @return Integer
+    */
+    private function getLatestBatchNumber()
     {
-        //
+        $lastBatchId = TaxInfo::select('batch_id')->orderBy('batch_id', 'DESC')->first();
+        return intval($lastBatchId->batch_id);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Get the next iteration of the resource's batch id.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Integer
      */
-    public function edit($id)
+    private function getNextBatchNumber()
     {
-        //
+        $lastBatchId = $this->getLatestBatchNumber();
+        return $lastBatchId + 1;
     }
 
     /**
-     * Update the specified resource in storage.
+     * Check if a Parcel ID format is valid
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param String
+     * @return Boolean
      */
-    public function update(Request $request, $id)
+    private function isValidParcelId($parcelId)
     {
-        //
+        return preg_match('/[0-9]{3}\-[0-9]{6}\-[0-9]{2}/', $parcelId);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Handle update/insert of a parcel id.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param String $parcelId
+     * @param Integer $batchId
      */
-    public function destroy($id)
+    public function insertParcelId($parcelId, $batchId)
     {
-        //
+        if( $this->isValidParcelId($parcelId) ) {
+            $updateCount = TaxInfo::where('parcel_id', $parcelId)->limit(1)->update(['batch_id' => $batchId]);
+            if($updateCount == 0) {
+                $parcel = new TaxInfo();
+                $parcel->batch_id = $batchId;
+                $parcel->status = 0;
+                $parcel->parcel_id = $parcelId;
+                $parcel->save();
+            }
+        }
     }
 
     /**

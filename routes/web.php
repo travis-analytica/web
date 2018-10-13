@@ -78,5 +78,21 @@ Route::get(
     ]
 );
 
+Route::get(
+    'tax-info/upload',
+    [
+        'as'   => 'tax-info.parcel-id.upload',
+        'uses' => 'TaxInfoController@upload',
+    ]
+);
+
+Route::post(
+    'tax-info/store',
+    [
+        'as'   => 'tax-info.parcel-id.store',
+        'uses' => 'TaxInfoController@store',
+    ]
+);
+
 
 }); /* End of middleware:auth group */
