@@ -76,6 +76,17 @@ class TaxInfoController extends Controller
     }
 
     /**
+     * Check if a Parcel ID format is valid
+     *
+     * @param String
+     * @return Boolean
+     */
+    public function isValidParcelId($parcelId)
+    {
+        return preg_match('/[0-9]{3}\-[0-9]{6}\-[0-9]{2}/', $parcelId);
+    }
+
+    /**
      * Handle update/insert of a parcel id.
      *
      * @param String $parcelId
@@ -83,13 +94,15 @@ class TaxInfoController extends Controller
      */
     public function insertParcelId($parcelId, $batchId)
     {
-        $updateCount = TaxInfo::where('parcel_id', $parcelId)->limit(1)->update(['batch_id' => $batchId]);
-        if($updateCount == 0) {
-            $parcel = new TaxInfo();
-            $parcel->batch_id = $batchId;
-            $parcel->status = 0;
-            $parcel->parcel_id = $parcelId;
-            $parcel->save();
+        if( $this->isValidParcelId($parcelId) ) {
+            $updateCount = TaxInfo::where('parcel_id', $parcelId)->limit(1)->update(['batch_id' => $batchId]);
+            if($updateCount == 0) {
+                $parcel = new TaxInfo();
+                $parcel->batch_id = $batchId;
+                $parcel->status = 0;
+                $parcel->parcel_id = $parcelId;
+                $parcel->save();
+            }
         }
     }
 
