@@ -4,13 +4,25 @@
 
 <div class="row">
     <div class="col-sm-8">
-        <h1>Tax Information</h1>
+        <h1 class="d-inline">Tax Information</h1>
+        @if($percentScraped == 100)
+            <h5 class="d-inline text-muted">- <span class="text-success">Scraper Finished</span></h5>
+        @endif
     </div>
     <div class="col-sm-4">
         <a href="{{ route('tax-info.export')           }}" class="btn btn-outline-secondary btn-lg float-sm-right d-block d-sm-inline mt-2 ml-4">EXPORT</a>
         <a href="{{ route('tax-info.parcel-id.upload') }}" class="btn btn-outline-success   btn-lg float-sm-right d-block d-sm-inline mt-2 ml-4">UPLOAD</a>
     </div>
 </div>
+
+@if($percentScraped < 100)
+<div class="col-10 offset-1 mt-4 mb-3">
+    <h5 class="font-weight-light">Data Scraper Currently Running <small>- {{$percentScraped}}% Complete</small></h5>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{$percentScraped}}" aria-valuemin="0" aria-valuemax="100" style="width: {{$percentScraped}}%"></div>
+    </div>
+</div>
+@endif
 
 
 <div class="table-responsive">

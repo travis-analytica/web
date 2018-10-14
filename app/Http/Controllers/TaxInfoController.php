@@ -17,6 +17,12 @@ class TaxInfoController extends Controller
      */
     public function index()
     {
+        $latestBatch = $this->getLatestBatchNumber();
+        $parcelsInBatch = TaxInfo::where('batch_id', $latestBatch)->count();
+        $scrapedParcels = TaxInfo::where('batch_id', $latestBatch)->where('status', '!=', 0)->count();
+
+        $data['percentScraped'] = round( (100 / $parcelsInBatch) * $scrapedParcels , 2);
+
         $data['parcels'] = TaxInfo::where('status', 1)
             ->where('batch_id', $this->getLatestBatchNumber())
             ->where('property_class', 'R - Residential')
@@ -60,7 +66,7 @@ class TaxInfoController extends Controller
     *
     * @return Integer
     */
-    private function getLatestBatchNumber()
+    public static function getLatestBatchNumber()
     {
         $lastBatchId = TaxInfo::select('batch_id')->orderBy('batch_id', 'DESC')->first();
         return intval($lastBatchId->batch_id);
