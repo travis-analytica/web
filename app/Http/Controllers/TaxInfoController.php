@@ -66,7 +66,7 @@ class TaxInfoController extends Controller
     *
     * @return Integer
     */
-    private function getLatestBatchNumber()
+    public static function getLatestBatchNumber()
     {
         $lastBatchId = TaxInfo::select('batch_id')->orderBy('batch_id', 'DESC')->first();
         return intval($lastBatchId->batch_id);
