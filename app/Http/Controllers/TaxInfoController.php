@@ -126,7 +126,11 @@ class TaxInfoController extends Controller
         $batchId = TaxInfoController::getLatestBatchNumber();
         $filename = md5($batchId) . '.csv';
 
-        $export = new \App\TaxInfoExport();
+        $export = \App\TaxInfoExport::where('batch_id', $batchId)->first();
+
+        if($export == null) {
+            $export = new \App\TaxInfoExport();
+        }
         $export->batch_id = $batchId;
         $export->storage_filename = $filename;
         $export->display_filename = 'batch_' . $batchId . '.csv';
