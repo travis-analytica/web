@@ -206,4 +206,28 @@ class TaxInfoController extends Controller
 
         }
     }
+
+    /**
+     * Display a list of exported tax information.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function exportList()
+    {
+        $files = \App\TaxInfoExport::limit(10)->get();
+
+        return view('tax-info.export', compact('files'));
+    }
+
+    /**
+     * Download the selected file of exported tax information
+     *
+     * @return Illuminate\Routing\ResponseFactory
+     */
+    public function exportDownload(Request $request, $id)
+    {
+        $file = \App\TaxInfoExport::find($id);
+
+        return response()->download(storage_path($file->storage_filename), $file->display_filename);
+    }
 }

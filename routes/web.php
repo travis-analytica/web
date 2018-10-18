@@ -73,8 +73,15 @@ Route::get(
 Route::get(
     'tax-info/export',
     [
-        'as'   => 'tax-info.export',
-        'uses' => 'TaxInfoController@export',
+        'as'   => 'tax-info.export.index',
+        'uses' => 'TaxInfoController@exportList',
+    ]
+);
+Route::get(
+    'tax-info/export/download/{id}',
+    [
+        'as'   => 'tax-info.export.index.download',
+        'uses' => 'TaxInfoController@exportDownload',
     ]
 );
 
