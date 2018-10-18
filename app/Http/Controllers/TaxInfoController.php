@@ -214,7 +214,7 @@ class TaxInfoController extends Controller
      */
     public function exportList()
     {
-        $files = \App\TaxInfoExport::limit(10)->get();
+        $files = \App\TaxInfoExport::limit(10)->orderBy('batch_id', 'DESC')->get();
 
         return view('tax-info.export', compact('files'));
     }
