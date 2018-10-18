@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Storage;
 use Redirect;
 use App\TaxInfo;
 use App\Exports\TaxInfoExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
+use \App\Http\Controllers\TaxInfoController;
 
 class TaxInfoController extends Controller
 {
@@ -119,9 +121,113 @@ class TaxInfoController extends Controller
      *
      * @return Maatwebsite\Excel\Facades\Excel
      */
-    public function export()
+    public static function export()
     {
-        ini_set('memory_limit', '-1');
-        return Excel::download(new TaxInfoExport, 'tax_info.xlsx');
+        $batchId = TaxInfoController::getLatestBatchNumber();
+        $filename = md5($batchId) . '.csv';
+
+        $export = \App\TaxInfoExport::where('batch_id', $batchId)->first();
+
+        if($export == null) {
+            $export = new \App\TaxInfoExport();
+        }
+        $export->batch_id = $batchId;
+        $export->storage_filename = $filename;
+        $export->display_filename = 'batch_' . $batchId . '.csv';
+        $export->save();
+
+        $headings = [
+            'Parcel ID',
+            'Address',
+            'Zip Code',
+            'Company Name',
+            'Name 1',
+            'Name 2',
+            'Address',
+            'City/State/Zip',
+            'Tax District',
+            'School District',
+            'Rental Registration',
+            'Tax Lien',
+            'Year Built',
+            'Fin Area',
+            'Bedrooms',
+            'Full Baths',
+            'Half Baths',
+            'Acres',
+            'Tansfer Date',
+            'Transfer Price',
+            'Property Class',
+            'Land Use',
+            'Net Annual Tax',
+            'Annual Total',
+            'Payment Total',
+            'Total Total',
+        ];
+
+        $file = fopen(storage_path($filename), 'w');
+        fputcsv($file, $headings);
+
+        $running = true;
+        $countSize = 1000;
+        $skipSize = 0;
+
+        while($running) {
+
+            $taxData = TaxInfo::select(
+                'parcel_id',              'address',                'ts_zip_code',
+                'company_name',           'tbm_name_1',             'tbm_name_2',
+                'tbm_address',            'tbm_city_state_zip',     'ts_tax_district',
+                'ts_school_district',     'ts_rental_registration', 'ts_tax_lien',
+                'dd_year_built',          'dd_fin_area',            'dd_bedrooms',
+                'dd_full_baths',          'dd_half_baths',          'sd_acres',
+                'mrt_tansfer_date',       'mrt_transfer_price',     'property_class',
+                'land_use',               'net_annual_tax',         'tyd_annual_total',
+                'tyd_payment_total',      'tyd_total_total'
+            )
+            ->where('batch_id', $batchId)
+            ->where('status', 1)
+            ->skip($skipSize)
+            ->limit($countSize)
+            ->get()
+            ->toArray();
+
+            if( count($taxData) < $countSize) {
+                $running = false;
+                $export->status = 1;
+                $export->save();
+            }else{
+                $skipSize += $countSize;
+            }
+
+            foreach($taxData as $row) {
+                fputcsv($file, $row);
+            }
+
+        }
+    }
+
+    /**
+     * Display a list of exported tax information.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function exportList()
+    {
+        $files = \App\TaxInfoExport::limit(10)->get();
+
+        return view('tax-info.export', compact('files'));
+    }
+
+    /**
+     * Download the selected file of exported tax information
+     *
+     * @return Illuminate\Routing\ResponseFactory
+     */
+    public function exportDownload(Request $request, $id)
+    {
+        $file = \App\TaxInfoExport::find($id);
+
+        return response()->download(storage_path($file->storage_filename), $file->display_filename);
     }
 }

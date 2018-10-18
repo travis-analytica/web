@@ -10,7 +10,7 @@
         @endif
     </div>
     <div class="col-sm-4">
-        <a href="{{ route('tax-info.export')           }}" class="btn btn-outline-secondary btn-lg float-sm-right d-block d-sm-inline mt-2 ml-4">EXPORT</a>
+        <a href="{{ route('tax-info.export.index')     }}" class="btn btn-outline-secondary btn-lg float-sm-right d-block d-sm-inline mt-2 ml-4">EXPORT</a>
         <a href="{{ route('tax-info.parcel-id.upload') }}" class="btn btn-outline-success   btn-lg float-sm-right d-block d-sm-inline mt-2 ml-4">UPLOAD</a>
     </div>
 </div>
