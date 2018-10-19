@@ -17,9 +17,9 @@ class CaseController extends Controller
      */
     public function index()
     {
-        $data['cases'] = Cases::where('valid', 1)->paginate(10);
+        $cases = Cases::where('valid', 1)->paginate(10);
 
-        return view('cases.index', $data);
+        return view( 'cases.index', compact('cases') );
     }
 
     /**

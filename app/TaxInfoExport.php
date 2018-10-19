@@ -2,6 +2,7 @@
 
 namespace App;
 
+use \Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class TaxInfoExport extends Model
@@ -18,4 +19,13 @@ class TaxInfoExport extends Model
      * @var boolean
      */
     public $timestamps = false;
+
+    /**
+     * Format the timestamp for the export file
+     *
+     */
+    public function getExportDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d M Y - h:i A');
+    }
 }

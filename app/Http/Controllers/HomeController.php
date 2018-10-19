@@ -9,23 +9,33 @@ use \App\Http\Controllers\TaxInfoController;
 
 class HomeController extends Controller
 {
-
+    /**
+     * Display a site homepage.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         if( Auth::guest() ) {
-            return view('login.login');
+            return view( 'login.login' );
         }else{
 
             $latestBatch = TaxInfoController::getLatestBatchNumber();
             $parcelsInBatch = TaxInfo::where('batch_id', $latestBatch)->count();
             $scrapedParcels = TaxInfo::where('batch_id', $latestBatch)->where('status', '!=', 0)->count();
-            $data['percentScraped'] = round( (100 / $parcelsInBatch) * $scrapedParcels , 2);
-            $data['latestBatch'] = $latestBatch;
+            $percentScraped = round( (100 / $parcelsInBatch) * $scrapedParcels , 2);
+            $latestBatch = $latestBatch;
 
-            return view('welcome', $data);
+            return view( 'welcome', compact('percentScraped', 'latestBatch') );
         }
     }
 
+    /**
+     * Attempt to create a user session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
 
@@ -47,6 +57,11 @@ class HomeController extends Controller
 
     }
 
+    /**
+     * End the current user session
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         Auth::logout();
