@@ -23,14 +23,14 @@ class TaxInfoController extends Controller
         $parcelsInBatch = TaxInfo::where('batch_id', $latestBatch)->count();
         $scrapedParcels = TaxInfo::where('batch_id', $latestBatch)->where('status', '!=', 0)->count();
 
-        $data['percentScraped'] = round( (100 / $parcelsInBatch) * $scrapedParcels , 2);
+        $percentScraped = round( (100 / $parcelsInBatch) * $scrapedParcels , 2);
 
-        $data['parcels'] = TaxInfo::where('status', 1)
+        $parcels = TaxInfo::where('status', 1)
             ->where('batch_id', $this->getLatestBatchNumber())
             ->where('property_class', 'R - Residential')
             ->paginate(10);
 
-        return view('tax-info.index', $data);
+        return view('tax-info.index', compact('percentScraped', 'parcels'));
     }
 
     /**

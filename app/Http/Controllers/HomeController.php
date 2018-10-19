@@ -17,16 +17,16 @@ class HomeController extends Controller
     public function index()
     {
         if( Auth::guest() ) {
-            return view('login.login');
+            return view( 'login.login' );
         }else{
 
             $latestBatch = TaxInfoController::getLatestBatchNumber();
             $parcelsInBatch = TaxInfo::where('batch_id', $latestBatch)->count();
             $scrapedParcels = TaxInfo::where('batch_id', $latestBatch)->where('status', '!=', 0)->count();
-            $data['percentScraped'] = round( (100 / $parcelsInBatch) * $scrapedParcels , 2);
-            $data['latestBatch'] = $latestBatch;
+            $percentScraped = round( (100 / $parcelsInBatch) * $scrapedParcels , 2);
+            $latestBatch = $latestBatch;
 
-            return view('welcome', $data);
+            return view( 'welcome', compact('percentScraped', 'latestBatch') );
         }
     }
 
