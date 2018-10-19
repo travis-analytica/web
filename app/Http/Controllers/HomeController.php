@@ -9,7 +9,11 @@ use \App\Http\Controllers\TaxInfoController;
 
 class HomeController extends Controller
 {
-
+    /**
+     * Display a site homepage.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         if( Auth::guest() ) {
@@ -26,6 +30,12 @@ class HomeController extends Controller
         }
     }
 
+    /**
+     * Attempt to create a user session
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
 
@@ -47,6 +57,11 @@ class HomeController extends Controller
 
     }
 
+    /**
+     * End the current user session
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout()
     {
         Auth::logout();

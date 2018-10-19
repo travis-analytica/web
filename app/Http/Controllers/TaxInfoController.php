@@ -117,9 +117,8 @@ class TaxInfoController extends Controller
     }
 
     /**
-     * Export the specified resource to an Excel file.
+     * Export the specified resource to a CSV file.
      *
-     * @return Maatwebsite\Excel\Facades\Excel
      */
     public static function export()
     {
@@ -222,6 +221,8 @@ class TaxInfoController extends Controller
     /**
      * Download the selected file of exported tax information
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  Integer  $id
      * @return Illuminate\Routing\ResponseFactory
      */
     public function exportDownload(Request $request, $id)
